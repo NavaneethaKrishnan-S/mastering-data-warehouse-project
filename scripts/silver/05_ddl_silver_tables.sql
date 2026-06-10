@@ -42,7 +42,10 @@ CREATE TABLE IF NOT EXISTS silver.crm_prd_info (
     prd_cost     INTEGER,
     prd_line     VARCHAR(50),
     prd_start_dt DATE,
-    prd_end_dt   DATE,
+    prd_end_dt   DATE,-- Check for Invalid Date Orders
+SELECT *
+FROM silver.crm_prd_info
+WHERE prd_end_dt < prd_start_dt;
     dwh_create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 );
@@ -54,9 +57,9 @@ CREATE TABLE IF NOT EXISTS silver.crm_sales_details (
     sls_ord_num  VARCHAR(50),
     sls_prd_key  VARCHAR(50),
     sls_cust_id  INTEGER,
-    sls_order_dt INTEGER,  -- Format: YYYYMMDD
-    sls_ship_dt  INTEGER,  -- Format: YYYYMMDD
-    sls_due_dt   INTEGER,  -- Format: YYYYMMDD
+    sls_order_dt DATE,  -- Format: YYYYMMDD
+    sls_ship_dt  DATE,  -- Format: YYYYMMDD
+    sls_due_dt   DATE,  -- Format: YYYYMMDD
     sls_sales    INTEGER,
     sls_quantity INTEGER,
     sls_price    INTEGER,
